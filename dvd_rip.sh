@@ -65,42 +65,42 @@ function version_error {
 function parse_options {
     check_installed_sw
     while (( $# > 0 )); do
-		case "$1" in
-			-d|--device)
-				SRC="$2"
-				shift 2
-				;;
-			-t|--title)
+        case "$1" in
+            -d|--device)
+                SRC="$2"
+                shift 2
+                ;;
+            -t|--title)
                 TITLE="$2"
-				shift 2
-				;;
+                shift 2
+                ;;
             -l|--location)
                 SAVE_LOCATION="$2"
                 shift 2
                 ;;
-			-h|--help)
-				print_help
-				exit
-				;;
+            -h|--help)
+                print_help
+                exit
+                ;;
             -*)
-				error "unknown option $1"
-				exit 1
-				;;
-			*)
-				if [[ -n "$title" ]]; then
-					error "additional argument $1"
-					exit 1
-				fi
+                error "unknown option $1"
+                exit 1
+                ;;
+            *)
+                if [[ -n "$title" ]]; then
+                    error "additional argument $1"
+                    exit 1
+                fi
 
-				title="$1"
-				shift
-				;;
-		esac
-	done
+                title="$1"
+                shift
+                ;;
+        esac
+    done
 
-	if [ -z ${SRC} -o ! -e ${SRC} ]; then
+    if [ -z ${SRC} -o ! -e ${SRC} ]; then
         get_source
-	fi
+    fi
 
     if [[ -z "$SAVE_LOCATION" ]]; then
         set_save_location
@@ -113,11 +113,11 @@ function parse_options {
 
 function error()
 {
-	if [[ -t 1 ]]; then
-		echo -e "\x1b[1m\x1b[31m!!!\x1b[0m \x1b[1m$1 \x1b[1m\x1b[31m!!!\x1b[0m" >&2
-	else
-		echo "!!! $1 !!!" >&2
-	fi
+    if [[ -t 1 ]]; then
+    echo -e "\x1b[1m\x1b[31m!!!\x1b[0m \x1b[1m$1 \x1b[1m\x1b[31m!!!\x1b[0m" >&2
+    else
+    echo "!!! $1 !!!" >&2
+    fi
 }
 
 # get the DVD-source
